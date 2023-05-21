@@ -1,20 +1,24 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
-require("dotenv").config();
+// require("dotenv").config();
+const { typeDefs, resolvers } = require('./schemas');
+const {authMiddleware} = require('./utils/auth');
 
 // Import the ApolloServer class
 const { ApolloServer } = require('apollo-server-express');
 
 // Import the two parts of a GraphQL schema
-const { typeDefs, resolvers } = require('./schemas');
+
 const db = require('./config/connection');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  introspection: true,
+  // context: authMiddleware
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +34,7 @@ const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
 
-  app.use(routes);
+  // app.use(routes);
 
   db.once('open', () => {
     app.listen(PORT, () => {
