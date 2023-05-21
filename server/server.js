@@ -34,7 +34,7 @@ const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
 
-  app.use(routes);
+  // app.use(routes);
 
   db.once('open', () => {
     app.listen(PORT, () => {
