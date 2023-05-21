@@ -18,7 +18,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
-  // context: authMiddleware
+  context: authMiddleware
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +34,7 @@ const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
 
-  // app.use(routes);
+  app.use(routes);
 
   db.once('open', () => {
     app.listen(PORT, () => {
