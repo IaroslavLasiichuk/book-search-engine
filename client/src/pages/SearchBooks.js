@@ -81,8 +81,6 @@ const SearchBooks = () => {
     }
   };
   
-  
-
   return (
     <>
       <div className='text-light bg-dark pt-5'>
