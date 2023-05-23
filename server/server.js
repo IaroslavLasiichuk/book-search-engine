@@ -3,7 +3,7 @@ const path = require('path');
 const routes = require('./routes');
 // require("dotenv").config();
 const { typeDefs, resolvers } = require('./schemas');
-const {authMiddleware} = require('./utils/auth');
+const { authMiddleware } = require('./utils/auth');
 
 // Import the ApolloServer class
 const { ApolloServer } = require('apollo-server-express');
