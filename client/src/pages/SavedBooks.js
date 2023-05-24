@@ -6,7 +6,6 @@ import  { REMOVE_BOOK } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
-
 const SavedBooks = () => {
   const [removeBook] = useMutation(REMOVE_BOOK);
   const { loading, error, data } = useQuery(GET_ME);
@@ -19,7 +18,6 @@ const SavedBooks = () => {
     return <p>Something went wrong!</p>;
   }
   const userData = data?.me; 
-  console.log(userData);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -43,8 +41,6 @@ const SavedBooks = () => {
       console.error(err);
     }
   };
-
-  // Rest of your component logic
 
   return (
     <>
