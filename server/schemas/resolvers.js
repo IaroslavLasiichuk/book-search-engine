@@ -33,23 +33,20 @@ const resolvers = {
       return { token, user };
     },
 
-   addUser: async (parent, {username, email, password }) => {
+    addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
 
+
     saveBook: async (parent, { bookData }, context) => {
-      if (context.user) {
-        console.log(context.user)
-        const user = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedBooks: bookData } },
-          { new: true }
-        );
-        return user;
-      }
-      throw new AuthenticationError('You need to be logged in to save a book');
+      const updateUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { savedBooks: bookData } },
+        { new: true }
+      );
+      return updateUser;
     },
 
     removeBook: async (parent, { bookId }, context) => {

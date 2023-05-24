@@ -1,8 +1,7 @@
 const express = require('express');
 const path = require('path');
-const routes = require('./routes');
-// require("dotenv").config();
 const { typeDefs, resolvers } = require('./schemas');
+require("dotenv").config();
 const { authMiddleware } = require('./utils/auth');
 
 // Import the ApolloServer class
@@ -33,8 +32,6 @@ if (process.env.NODE_ENV === 'production') {
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
-
-  // app.use(routes);
 
   db.once('open', () => {
     app.listen(PORT, () => {
