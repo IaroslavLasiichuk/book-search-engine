@@ -15,7 +15,7 @@ const SignupForm = () => {
     email: '',
     password: '',
   });
-  const [addProfile, { error, data }] = useMutation(ADD_USER);
+  const [addProfile] = useMutation(ADD_USER);
   
   const handleChange = (event) => {
     const { name, value } = event.target;
